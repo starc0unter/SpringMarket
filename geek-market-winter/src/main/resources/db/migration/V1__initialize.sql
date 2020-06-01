@@ -9,7 +9,7 @@ CREATE TABLE users (
   first_name            VARCHAR(50) NOT NULL,
   last_name             VARCHAR(50) NOT NULL,
   email                 VARCHAR(50) NOT NULL,
-  phone                 VARCHAR(15) NOT NULL,
+  phone                 VARCHAR(15) NOT NULL DEFAULT '',
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

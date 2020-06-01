@@ -47,11 +47,12 @@
             </tbody>
         </table>
 
-        <div th:if="${!order.confirmed}">
+        <div> <!--th:if="${!order.confirmed()}"-->
             <span>Укажите адрес доставки</span>
-            <select class="form-control" th:field="*{deliveryAddress}"  id="dropDeliveryAddresses">
-                <option th:each="o : ${deliveryAddresses}" th:value="${o.id}" th:text="${o.address}"></option>
-            </select>
+           <!-- <select class="form-control" th:field="*{deliveryAddress}"  id="dropDeliveryAddresses">
+                <option th:each="o : ${user.deliveryAddresses}" th:value="${o.id}" th:text="${o.address}"></option>
+            </select>-->
+            <input type="text" th:field="*{deliveryAddress.address}" class="form-control input-sm">
             <br>
             <span>Укажите номер телефона</span>
             <input type="text" th:field="*{phoneNumber}" class="form-control input-sm">
@@ -61,18 +62,18 @@
                 <button class="btn btn-secondary" th:href="@{/shop}">Вернуться в магазин</button>
             </div>
         </div>
-        <div th:unless="${!order.confirmed}">
+<!--        <div th:unless="${!order.confirmed()}">
             <span th:text="'Адрес доставки: ' + ${order.deliveryAddress.address}"/>
             <br>
             <span th:text="'Номер телефона: ' + ${order.phoneNumber}"/>
             <br>
             <br>
             <div class="col-sm-6 controls">
-                <!--<a class="btn btn-primary" th:href="@{'/shop/order/result/' + ${order.id}}">Оплатить</a>-->
+                &lt;!&ndash;<a class="btn btn-primary" th:href="@{'/shop/order/result/' + ${order.id}}">Оплатить</a>&ndash;&gt;
                 <a class="btn btn-primary" th:href="@{'/paypal/buy'}">Оплатить</a>
                 <button class="btn btn-secondary" th:href="@{/shop}">Вернуться на страницу магазина</button>
             </div>
-        </div>
+        </div>-->
     </form>
 </div>
 </body>

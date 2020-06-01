@@ -1,5 +1,6 @@
 package com.geekbrains.geekmarketwinter.utils;
 
+import com.geekbrains.geekmarketwinter.entites.OrderItem;
 import com.geekbrains.geekmarketwinter.entites.Product;
 import lombok.Data;
 

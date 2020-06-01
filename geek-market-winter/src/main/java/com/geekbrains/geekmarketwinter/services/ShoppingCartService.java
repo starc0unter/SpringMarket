@@ -1,5 +1,6 @@
 package com.geekbrains.geekmarketwinter.services;
 
+import com.geekbrains.geekmarketwinter.entites.OrderStatus;
 import com.geekbrains.geekmarketwinter.entites.Product;
 import com.geekbrains.geekmarketwinter.utils.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,10 @@ public class ShoppingCartService {
 
     public void resetCart(HttpSession session) {
         session.removeAttribute("cart");
+    }
+
+    public void saveStatus(OrderStatus status) {
+
     }
 
     public void addToCart(HttpSession session, Long productId) {

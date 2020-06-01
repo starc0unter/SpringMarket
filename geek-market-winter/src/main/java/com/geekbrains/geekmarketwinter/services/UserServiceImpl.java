@@ -1,8 +1,10 @@
 package com.geekbrains.geekmarketwinter.services;
 
+import com.geekbrains.geekmarketwinter.entites.DeliveryAddress;
 import com.geekbrains.geekmarketwinter.entites.Role;
 import com.geekbrains.geekmarketwinter.entites.SystemUser;
 import com.geekbrains.geekmarketwinter.entites.User;
+import com.geekbrains.geekmarketwinter.repositories.DeliveryAddressRepository;
 import com.geekbrains.geekmarketwinter.repositories.RoleRepository;
 import com.geekbrains.geekmarketwinter.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private DeliveryAddressRepository deliveryAddressRepository;
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
@@ -37,6 +40,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Autowired
+    public void setDeliveryAddressRepository(DeliveryAddressRepository deliveryAddressRepository) {
+        this.deliveryAddressRepository = deliveryAddressRepository;
     }
 
     @Override
@@ -75,6 +83,10 @@ public class UserServiceImpl implements UserService {
         }
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
+    }
+
+    public DeliveryAddress saveDeliveryAddress(User user, String deliveryAddress) {
+        return deliveryAddressRepository.save(new DeliveryAddress(user, deliveryAddress));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
