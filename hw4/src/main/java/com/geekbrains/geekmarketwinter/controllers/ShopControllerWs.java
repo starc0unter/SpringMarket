@@ -2,7 +2,6 @@ package com.geekbrains.geekmarketwinter.controllers;
 
 import com.geekbrains.geekmarketwinter.entites.Message;
 import com.geekbrains.geekmarketwinter.entites.OrderLight;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -23,7 +22,12 @@ public class ShopControllerWs {
         System.out.println(event);
     }
 
-    public void sendMessage(String destination, OrderLight order) {
-        simpMessagingTemplate.convertAndSend(destination, order);
+    public void sendViaWebsocket(OrderLight orderLight) {
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        simpMessagingTemplate.convertAndSend("/topic/productAdded", orderLight);
     }
 }

@@ -1,6 +1,7 @@
 package com.geekbrains.geekmarketwinter.controllers;
 
 import com.geekbrains.geekmarketwinter.entites.*;
+import com.geekbrains.geekmarketwinter.rabbit.RabbitMsgSender;
 import com.geekbrains.geekmarketwinter.repositories.specifications.ProductSpecs;
 import com.geekbrains.geekmarketwinter.services.*;
 import com.geekbrains.geekmarketwinter.utils.ShoppingCart;
@@ -114,19 +115,11 @@ public class ShopController {
 
         OrderLight lightOrder = new OrderLight();
         cart.getItems().forEach(item -> lightOrder.addProductInfo(item.getId(), item.getQuantity()));
-        new Thread(() -> sendViaWebsocket(lightOrder)).start();
+        new Thread(() -> controllerWs.sendViaWebsocket(lightOrder)).start();
+        RabbitMsgSender.INSTANCE.send("[info]", "product has been added to cart");
 
         String referrer = httpServletRequest.getHeader("referer");
         return "redirect:" + referrer;
-    }
-
-    private void sendViaWebsocket(OrderLight orderLight) {
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        controllerWs.sendMessage("/topic/productAdded", orderLight);
     }
 
     @PostMapping("/order/confirm")

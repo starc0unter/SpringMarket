@@ -12,7 +12,6 @@ function connect() {
             for (let [id, quantity] of Object.entries(parsed.productId2Quantity)) {
                 showResult(id, quantity)
             }
-            document.getElementById("totalProducts").innerHTML = parsed.totalQuantity;
         });
     });
 }
