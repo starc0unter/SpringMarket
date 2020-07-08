@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить товар</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
+</head>
+
+<html>
+
+<body>
+<div th:replace="~{navigation :: navi(AddProduct)}"></div>
+
+<br>
+<h3>Modify product</h3>
+
+<div class="container">
+    <form th:action="@{/product/modify}" th:object="${product}" method="post">
+        <div class="form-group">
+            <input type="text" th:field="*{id}" class="form-control" id="productId" th:placeholder="${product.getId()}" readonly>
+        </div>
+        <div class="form-group">
+            <input type="text" th:field="*{title}" class="form-control" id="productTitle" th:placeholder="${product.getTitle()}">
+        </div>
+        <div class="form-group">
+            <input type="text" th:field="*{price}" class="form-control" id="productCost" th:placeholder="${product.getPrice()}">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+</body>
+</html>
