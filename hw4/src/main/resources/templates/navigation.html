@@ -18,7 +18,7 @@
 <div class="fluid-container" th:fragment="navi(activeTab)">
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
         <div class="spaceBetween">
-            <a class="navbar-brand" th:href="@{/}">GeekWinterMarket</a>
+            <a class="navbar-brand" th:href="@{/}" id="home">GeekWinterMarket</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -26,15 +26,15 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
-                        <a class="nav-link" th:href="@{/shop/?page=1}">Товары<span
+                        <a class="nav-link" th:href="@{/shop/?page=1}" id="goods">Товары<span
                                 class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item" th:classappend="${activeTab == 'Cart' ? 'active' : ''}">
-                        <a class="nav-link" th:href="@{/cart}">Корзина<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" th:href="@{/cart}" id="cart">Корзина<span class="sr-only">(current)</span></a>
                     </li>
                     <li sec:authorize="isAuthenticated()" class="nav-item"
                         th:classappend="${activeTab == 'Profile' ? 'active' : ''}">
-                        <a class="nav-link" th:href="@{/profile}">Профиль</a>
+                        <a class="nav-link" th:href="@{/profile}" id="profile">Профиль</a>
                     </li>
                     <li sec:authorize="hasRole('ADMIN')" class="nav-item"
                         th:classappend="${activeTab == 'AdminDashboard' ? 'active' : ''}">
@@ -42,17 +42,17 @@
                     </li>
                     <li sec:authorize="isAuthenticated()" class="nav-item">
                         <form th:action="@{/logout}" method="POST">
-                            <input type="submit" class="btn btn-danger" value="Logout"/>
+                            <input type="submit" class="btn btn-danger" value="Logout" id="logout"/>
                         </form>
                     </li>
                     <li sec:authorize="isAnonymous()" class="nav-item">
                         <form class="align-middle" th:action="@{/authenticateTheUser}" method="POST">
                             <div class="input-group-prepend">
-                                <input class="form-control" type="text" placeholder="Логин" name="username"
+                                <input class="form-control" type="text" placeholder="Логин" name="username" id="login"
                                        aria-describedby="inputGroup-sizing-sm">
-                                <input class="form-control" type="text" placeholder="Пароль" name="password"
+                                <input class="form-control" type="text" placeholder="Пароль" name="password" id="password"
                                        aria-describedby="inputGroup-sizing-sm">
-                                <button class="btn btn-secondary btn-sm" type="submit">Войти</button>
+                                <button class="btn btn-secondary btn-sm" type="submit" id="submit">Войти</button>
                             </div>
                         </form>
                     </li>
