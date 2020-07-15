@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Orders History</title>
+
+    <link rel="icon" type="image/png" th:href="@{/favicon.ico}"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <div th:replace="~{navigation :: navigation(History)}"/>
+
+    <h1>История заказов</h1>
+    <span th:if="${orders.size() == 0}">Ваша история заказов пока пуста</span>
+    <table th:if="${orders.size() > 0}" class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Состав заказа</th>
+            <th>Цена</th>
+            <th>Дата оформления</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td>
+                <ul>
+                    <li th:each="orderItem : ${order.items}" th:text="${orderItem.product.title + ' x' + orderItem.quantity}"></li>
+                </ul>
+            </td>
+            <td th:text="${order.price}"></td>
+            <td th:text="${order.createdAt}"></td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
